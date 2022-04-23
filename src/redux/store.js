@@ -1,12 +1,16 @@
-import { createStore, combineReducers } from "redux";
-const reducer = (state, action) => {
-    return state;
-};
+import { createStore, combineReducers } from 'redux';
+import initialState from './initialState';
+import postsReducer from './postsRedux';
 
+const subreducers = {
+    posts: postsReducer,
+}
+
+const reducer = combineReducers(subreducers);
 const store = createStore(
-    reducer,
-    
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export default store;
