@@ -1,13 +1,25 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { getPostById } from "../../../../redux/postsRedux";
+import { getPostById, removePost } from "../../../../redux/postsRedux";
 
 
 const SinglePost = () => {
-    
+
+    const dispatch = useDispatch();
+
     const { id } = useParams();
     const post = useSelector(state => getPostById(state, id));
+
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const removeHandler = e => {
+        e.preventDefault();
+        dispatch(removePost(id))
+    };
 
     if (!post) return <Navigate to='/' />;
     return (
@@ -32,10 +44,25 @@ const SinglePost = () => {
                   Edit
                 </Button>
               </Link>
-              <Button variant="outline-danger">Delete</Button>
+              <Button variant="outline-danger" onClick={handleShow}>Delete</Button>
             </Col>
           </Row>
         </Container>
+
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This operation will completely remove this post from the app. Are you sure you want to do that?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={(e) => { handleClose(e); removeHandler(e)}}>
+            Remove
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </div>
     );
 };
