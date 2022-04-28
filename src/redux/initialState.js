@@ -13,7 +13,7 @@ const inititalState = {
             title: 'Article title II',
             shortDescription: 'Short description of the article...',
             content: 'Main content of the article',
-            publishedDate: '02-02-2022',
+            publishedDate: '07-07-2022',
             author: 'John Doe'
         },
         {
@@ -21,7 +21,7 @@ const inititalState = {
             title: 'Article title III',
             shortDescription: 'Short description of the article...',
             content: 'Main content of the article',
-            publishedDate: '02-02-2022',
+            publishedDate: '06-03-2020',
             author: 'John Doe'
         },
     ],
