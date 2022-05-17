@@ -3,6 +3,7 @@ import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getPostById, removePost } from "../../../../redux/postsRedux";
+import dateToStr from "../../../../utils/dateToStr";
 
 
 const SinglePost = () => {
@@ -34,9 +35,9 @@ const SinglePost = () => {
             </p>
             <p>
               <b>Published: </b>
-              {post.publishedDate}
+              {dateToStr(post.publishedDate)}
             </p>
-            <p>{post.content}</p>
+            <p dangerouslySetInnerHTML={{ __html: post.content }} />
             </Col>
             <Col md="4">
               <Link key={post.id} to={`/post/edit/${post.id}`}>
