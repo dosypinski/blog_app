@@ -37,7 +37,11 @@ const SinglePost = () => {
               <b>Published: </b>
               {dateToStr(post.publishedDate)}
             </p>
-            <p dangerouslySetInnerHTML={{ __html: post.content }} />
+            <p>
+              <b>Category: </b>
+              {post.category}
+            </p>
+            <p dangerouslySetInnerHTML={{ __html: post.mainContent }} />
             </Col>
             <Col md="4">
               <Link key={post.id} to={`/post/edit/${post.id}`}>
